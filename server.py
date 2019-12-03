@@ -55,18 +55,19 @@ def message_received(client, server, message):
 				month = t.month
 				year = t.year
 				print("hour,time,second,day", hour, minute, second, day, month, year)
-				'''user = quote_plus('azizahtas')
+				user = quote_plus('azizahtas')
 				pwd = quote_plus('gF0aiUCmNyag3gCQ')
-				client = MongoClient("mongodb://{}:{}@cluster0-shard-00-00-eq3rd.mongodb.net:27017,cluster0-shard-00-01-eq3rd.mongodb.net:27017,cluster0-shard-00-02-eq3rd.mongodb.net:27017/locationDb?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority".format(user, pwd))
-				#db = client.locationdb
+				client = MongoClient("mongodb://{}:{}@cluster0-shard-00-00-eq3rd.mongodb.net:27017,cluster0-shard-00-01-eq3rd.mongodb.net:27017,cluster0-shard-00-02-eq3rd.mongodb.net:27017/locationdb?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority".format(user, pwd))
 				db = client["locationdb"]
 				print("connection established", db)
-				mycol = db["geo_location_10"]
-				mydict = {"imei": data[2], "lat": gps[2], "longitude": gps[3],"speed": gps[4], "event": gps[6], "battery": gps[7]}
+				mycol = db["geo_location"]
+				mydict = {"imei":data[2], "lat":gps[2], "long":gps[3], "battery":gps[7], "day":day, "month":month, "year":year, "hour":hour, "min":minute, "sec":second}
 				x = mycol.insert_one(mydict)
-				print("data inserted")'''
+				print(x)
+				print("data inserted")
 				time.sleep(5)
 			print("Client(%s) said: %s" % (client['id'], message))
+			
 PORT=9001
 server = WebsocketServer(PORT)
 server.set_fn_new_client(new_client)
